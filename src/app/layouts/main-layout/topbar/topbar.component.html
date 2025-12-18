@@ -1,0 +1,75 @@
+<header
+  class="h-16 w-full bg-white border-b border-[rgba(13,13,13,0.1)] px-6 flex items-center justify-between"
+>
+  <!-- LEFT -->
+  <div class="flex items-center gap-4 relative">
+    <!-- Product -->
+    <span class="text-[16px] font-medium tracking-[0.02em] text-[#1D1D1B]">
+      Crowd Solutions
+    </span>
+
+    <!-- Divider -->
+    <span class="h-6 w-px bg-[rgba(13,13,13,0.15)]"></span>
+
+    <!-- Site Dropdown -->
+    <div class="relative">
+      <button
+        (click)="toggleDropdown()"
+        class="flex items-center gap-2 px-3 py-2 border border-[rgba(13,13,13,0.1)] rounded-md text-[14px] font-medium text-[#030303] hover:bg-[rgba(13,13,13,0.04)]"
+      >
+        <img
+          src="/svg/location.svg"
+          alt="Location"
+          class="w-4 h-4 opacity-70"
+        />
+
+        <span class="leading-none">
+          {{ activeSite()?.name || "Select Site" }}
+        </span>
+
+        <svg class="w-4 h-4 opacity-60 ml-1" viewBox="0 0 24 24" fill="none">
+          <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" />
+        </svg>
+      </button>
+
+      <!-- Dropdown Menu -->
+      <div
+        *ngIf="dropdownOpen()"
+        class="absolute top-full left-0 mt-2 w-56 bg-white border border-[rgba(13,13,13,0.1)] rounded-md shadow-lg z-50"
+      >
+        <button
+          *ngFor="let site of sites()"
+          (click)="selectSite(site)"
+          class="w-full text-left px-4 py-2 text-[14px] hover:bg-[rgba(13,13,13,0.04)] text-[#030303]"
+        >
+          {{ site.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="flex items-center gap-6">
+    <!-- Alerts -->
+    <button
+      class="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-[rgba(13,13,13,0.04)]"
+      (click)="toggleAlerts()"
+    >
+      <img src="/svg/bell-with-dot.svg" alt="Notifications" class="w-6 h-6" />
+    </button>
+
+    <!-- Avatar -->
+    <div
+      class="w-8 h-8 rounded-full bg-[#009490] text-white text-[14px] font-medium flex items-center justify-center"
+    >
+      S
+    </div>
+  </div>
+</header>
+
+<!-- Alerts Drawer -->
+<app-alerts-drawer
+  [open]="alertsOpen()"
+  [alerts]="alerts()"
+  (close)="alertsOpen.set(false)"
+></app-alerts-drawer>

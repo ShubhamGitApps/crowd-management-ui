@@ -1,0 +1,119 @@
+<div class="min-h-screen flex items-center px-6 lg:px-20">
+  <div class="hidden lg:flex flex-1 items-center">
+    <h1
+      class="login-headline text-white text-4xl font-semibold leading-snug max-w-xl"
+    >
+      Welcome to the<br />
+      Crowd Management System
+    </h1>
+  </div>
+
+  <!-- LOGIN CARD -->
+  <div
+    class="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden mx-auto lg:mx-0"
+  >
+    <div
+      class="relative h-[110px] flex items-center justify-center bg-[#0A5D5C] overflow-hidden"
+      style="
+        background: radial-gradient(
+          130.14% 100% at 50% 50%,
+          #0a5d5c 0%,
+          #282829 100%
+        );
+      "
+    >
+      <img
+        src="/svg/Vector.svg"
+        alt=""
+        aria-hidden="true"
+        class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+      />
+      <div class="relative z-10 flex items-center gap-3">
+        <img
+          src="/svg/kloudspot-logo.svg"
+          alt="Kloudspot logo"
+          class="h-[40px]"
+        />
+        <span
+          class="font-['IBM_Plex_Sans'] font-semibold text-white text-[18px]"
+        >
+          Kloudspot
+        </span>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="px-6 py-6 space-y-5">
+      <form
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+        class="flex flex-col gap-[22px]"
+      >
+        <!-- EMAIL -->
+        <div class="relative">
+          <div
+            class="absolute -top-3 left-2 bg-white px-1 login-label flex items-center gap-[2px]"
+          >
+            <span>Log In</span>
+            <span class="text-red-500">*</span>
+          </div>
+
+          <input
+            type="email"
+            formControlName="email"
+            class="w-full h-[44px] rounded-[2px] border border-[rgba(13,13,13,0.1)] px-3 pt-2 text-[12px] font-medium font-['IBM_Plex_Sans'] focus:outline-none focus:ring-0"
+          />
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="relative">
+          <div
+            class="absolute -top-3 left-2 px-1 login-label flex items-center gap-[2px]"
+          >
+            <span>Password</span>
+            <span class="text-red-500">*</span>
+          </div>
+
+          <input
+            [type]="hidePassword() ? 'password' : 'text'"
+            formControlName="password"
+            class="w-full h-[44px] rounded-[2px] border border-[rgba(13,13,13,0.1)] px-3 pr-[44px] text-[12px] font-medium font-['IBM_Plex_Sans'] text-[#030303] focus:outline-none focus:ring-0"
+          />
+
+          <button
+            type="button"
+            (click)="togglePassword()"
+            class="absolute right-3 top-1/2 -translate-y-1/2 w-[20px] h-[20px] flex items-center justify-center cursor-pointer"
+            aria-label="Toggle password visibility"
+          >
+            <img
+              src="/svg/eye.svg"
+              alt="Toggle password visibility"
+              class="w-[20px] h-[20px]"
+            />
+          </button>
+        </div>
+
+        <div class="flex flex-col gap-[16px]">
+          <!-- Error -->
+          <p *ngIf="auth.error()" class="text-sm text-red-600">
+            {{ auth.error() }}
+          </p>
+
+          <!--LOGIN Button -->
+          <button
+            type="submit"
+            [disabled]="auth.isLoading()"
+            class="w-full h-[42px] bg-[#009490] rounded-lg flex items-center justify-center transition disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <span
+              class="login-button-text font-['IBM_Plex_Sans'] font-normal text-[16px] leading-[16px] text-white capitalize"
+            >
+              {{ auth.isLoading() ? "Logging in…" : "Login" }}
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

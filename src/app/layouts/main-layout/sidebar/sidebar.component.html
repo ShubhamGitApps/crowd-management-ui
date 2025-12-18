@@ -1,0 +1,118 @@
+<aside
+  class="relative h-full flex flex-col transition-all duration-300 bg-[radial-gradient(130.14%_50%_at_50%_50%,#0A5D5C_0%,#282829_100%)]"
+  [class.w-64]="!collapsed()"
+  [class.w-20]="collapsed()"
+>
+  <!-- Sidebar Web Background -->
+  <img
+    src="/svg/sidebar-web.svg"
+    class="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none"
+  />
+
+  <!-- Top Section -->
+  <div
+    class="relative z-10 h-16 flex items-center"
+    [class.justify-center]="collapsed()"
+    [class.justify-between]="!collapsed()"
+    [class.px-4]="!collapsed()"
+  >
+    <!-- Logo + Name (ONLY when expanded) -->
+    <div *ngIf="!collapsed()" class="flex items-center gap-2">
+      <img src="/svg/kloudspot-logo.svg" class="w-8 h-8" />
+      <span class="text-white font-semibold text-lg">Kloudspot</span>
+    </div>
+
+    <!-- Hamburger -->
+    <button
+      (click)="toggle()"
+      class="group relative text-white opacity-80 hover:opacity-100"
+    >
+      <img src="/svg/hamburger.svg" class="w-6 h-6" />
+
+      <!-- Tooltip -->
+      <span
+        class="absolute left-full ml-3 px-2 py-1 text-xs bg-black text-white rounded opacity-0 group-hover:opacity-100 whitespace-nowrap"
+      >
+        {{ toggleLabel }}
+      </span>
+    </button>
+  </div>
+
+  <!-- Navigation -->
+  <nav
+    class="relative z-10 flex-1 mt-4 space-y-1"
+    [class.px-2]="!collapsed()"
+    [class.flex]="collapsed()"
+    [class.flex-col]="collapsed()"
+    [class.items-center]="collapsed()"
+  >
+    <!-- Overview -->
+    <a
+      routerLink="/overview"
+      routerLinkActive="bg-white/15"
+      class="group flex items-center gap-3 px-3 py-2 rounded-md text-white hover:bg-white/10 transition"
+      [ngClass]="{
+        'justify-center': collapsed(),
+        'justify-start': !collapsed()
+      }"
+    >
+      <img src="/svg/home.svg" class="w-5 h-5" />
+
+      <span *ngIf="!collapsed()">Overview</span>
+
+      <!-- Tooltip -->
+      <span
+        *ngIf="collapsed()"
+        class="absolute left-full ml-3 px-2 py-1 text-xs bg-black text-white rounded opacity-0 group-hover:opacity-100 whitespace-nowrap"
+      >
+        Overview
+      </span>
+    </a>
+
+    <!-- Crowd Entries -->
+    <a
+      routerLink="/crowd-entries"
+      routerLinkActive="bg-white/15"
+      class="group flex items-center gap-3 px-3 py-2 rounded-md text-white hover:bg-white/10 transition"
+      [ngClass]="{
+        'justify-center': collapsed(),
+        'justify-start': !collapsed()
+      }"
+    >
+      <img src="/svg/arrow-box.svg" class="w-5 h-5" />
+
+      <span *ngIf="!collapsed()">Crowd Entries</span>
+
+      <span
+        *ngIf="collapsed()"
+        class="absolute left-full ml-3 px-2 py-1 text-xs bg-black text-white rounded opacity-0 group-hover:opacity-100 whitespace-nowrap"
+      >
+        Crowd Entries
+      </span>
+    </a>
+  </nav>
+
+  <!-- Logout -->
+  <div
+    class="relative z-10 px-2 py-4 flex"
+    [class.justify-center]="collapsed()"
+    [class.justify-start]="!collapsed()"
+  >
+    <button
+      (click)="logout()"
+      class="group flex items-center gap-3 px-3 py-2 rounded-md text-white hover:bg-white/10 transition w-auto"
+      [class.justify-center]="collapsed()"
+    >
+      <img src="/svg/logout.svg" class="w-5 h-5" />
+
+      <span *ngIf="!collapsed()">Logout</span>
+
+      <span
+        *ngIf="collapsed()"
+        class="absolute left-full ml-3 px-2 py-1 text-xs bg-black text-white rounded opacity-0 group-hover:opacity-100 whitespace-nowrap"
+      >
+        Logout
+      </span>
+    </button>
+  </div>
+</aside>

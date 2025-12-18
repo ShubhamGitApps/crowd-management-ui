@@ -1,0 +1,108 @@
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-lg font-semibold text-textPrimary">Crowd Entries</h1>
+
+  <button
+    class="flex items-center gap-2 px-4 py-2 border rounded-lg text-sm text-textPrimary bg-white"
+  >
+    Today
+  </button>
+</div>
+
+<div class="bg-white border rounded-xl overflow-hidden">
+  <div class="max-h-[576px] overflow-y-auto">
+    <table class="w-full text-sm border-collapse">
+      <thead class="bg-gray-100 text-textSecondarys sticky top-0 z-10">
+        <tr>
+          <th class="text-left px-6 py-4 font-medium">Name</th>
+          <th class="text-left px-6 py-4 font-medium">Sex</th>
+          <th class="text-left px-6 py-4 font-medium">Entry</th>
+          <th class="text-left px-6 py-4 font-medium">Exit</th>
+          <th class="text-left px-6 py-4 font-medium">Dwell Time</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let r of facade.records()" class="border-b last:border-0">
+          <td class="px-6 py-4 flex items-center gap-3">
+            <img
+              *ngIf="r.gender == 'male'"
+              src="/images/avatar.png"
+              class="w-8 h-8 rounded-full"
+              alt="avatar"
+            />
+
+            <img
+              *ngIf="r.gender == 'female'"
+              src="/images/avatar-female.png"
+              class="w-8 h-8 rounded-full"
+              alt="avatar"
+            />
+            <span class="text-textPrimary">
+              {{ r.personName }}
+            </span>
+          </td>
+
+          <td class="px-6 py-4 text-textSecondary">
+            {{ r.gender || "—" }}
+          </td>
+
+          <td class="px-6 py-4 text-textSecondary">
+            {{ r.entryLocal || "—" }}
+          </td>
+
+          <td class="px-6 py-4 text-textSecondary">
+            {{ r.exitLocal || "—" }}
+          </td>
+
+          <td class="px-6 py-4 text-textSecondary">
+            {{ r.dwellMinutes ? "00:" + r.dwellMinutes : "—" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="facade.loading()" class="space-y-3">
+  <div
+    *ngFor="let _ of [1, 2, 3, 4, 5]"
+    class="h-10 bg-gray-100 rounded animate-pulse"
+  ></div>
+</div>
+
+<!-- PAGINATION -->
+<div class="flex justify-center items-center gap-3 mt-6 text-sm">
+  <button
+    class="px-2 text-textSecondary disabled:opacity-40"
+    (click)="facade.prevPage()"
+    [disabled]="facade.pageNumber() === 1"
+  >
+    ‹
+  </button>
+
+  <ng-container *ngFor="let p of facade.pages(); let i = index">
+    <span
+      *ngIf="i > 0 && p - facade.pages()[i - 1] > 1"
+      class="px-1 text-textSecondary"
+    >
+      …
+    </span>
+
+    <button
+      class="px-2 pb-1 border-b-2 transition"
+      [class.border-primary]="facade.pageNumber() === p"
+      [class.border-transparent]="facade.pageNumber() !== p"
+      (click)="facade.pageNumber.set(p); facade.load()"
+    >
+      {{ p }}
+    </button>
+  </ng-container>
+
+  <button
+    class="px-2 text-textSecondary disabled:opacity-40"
+    (click)="facade.nextPage()"
+    [disabled]="facade.pageNumber() === facade.totalPages()"
+  >
+    ›
+  </button>
+</div>

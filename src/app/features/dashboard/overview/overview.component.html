@@ -1,0 +1,114 @@
+<div class="flex flex-col gap-6">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-semibold text-textPrimary">Overview</h2>
+
+    <div
+      class="px-4 py-2 rounded-lg border border-border text-sm text-textSecondary bg-white"
+    >
+      Today
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+    <!-- Live Occupancy + Footfall -->
+    <div
+      class="lg:col-span-2 bg-white rounded-xl border border-border p-6 flex"
+    >
+      <div class="flex-1">
+        <p class="text-sm text-textSecondary mb-3">Live Occupancy</p>
+
+        <p class="text-3xl font-semibold text-textPrimary mb-3">
+          {{ facade.liveOccupancy() ?? "--" }}
+        </p>
+
+        <div class="mb-1">
+          <img src="/svg/arrow-up.svg" alt="up" class="w-4 h-4" />
+        </div>
+
+        <p class="text-sm text-success">10% more than yesterday</p>
+      </div>
+
+      <!-- Divider -->
+      <div class="w-px h-40 bg-border mx-6"></div>
+
+      <!-- Today’s Footfall -->
+      <div class="flex-1">
+        <p class="text-sm text-textSecondary mb-3">Today’s Footfall</p>
+
+        <p class="text-3xl font-semibold text-textPrimary mb-3">
+          {{ facade.footfall() ?? "--" }}
+        </p>
+
+        <div class="mb-1">
+          <img src="/svg/arrow-down.svg" alt="down" class="w-4 h-4" />
+        </div>
+
+        <p class="text-sm text-danger">10% less than yesterday</p>
+      </div>
+    </div>
+
+    <!-- Avg Dwell Time -->
+    <div class="bg-white rounded-xl p-6">
+      <p class="text-sm text-textSecondary mb-3">Avg Dwell Time</p>
+
+      <p class="text-3xl font-semibold text-textPrimary mb-3">
+        {{ facade.avgDwellMinutes() ?? "--" }} min
+      </p>
+
+      <div class="mb-1">
+        <img src="/svg/arrow-up.svg" alt="up" class="w-4 h-4" />
+      </div>
+
+      <p class="text-sm text-success">5% more than yesterday</p>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg p-4 h-[327px]">
+    <app-base-chart
+      [options]="occupancyChartOptions()"
+      class="block w-full h-full"
+    ></app-base-chart>
+  </div>
+
+  <!-- DEMOGRAPHICS -->
+  <div class="space-y-4">
+    <h2 class="text-lg font-medium text-textPrimary">Demographics</h2>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_3fr] gap-6 min-w-0">
+      <div class="bg-white border rounded-xl p-6">
+        <p class="text-sm font-medium mb-4">Charts of Demographics</p>
+
+        <div class="h-[220px]">
+          <app-base-chart
+            class="w-full h-full"
+            [options]="demographicsDonutOptions()"
+          ></app-base-chart>
+        </div>
+
+        <div class="mt-4 flex flex-col gap-2 text-sm text-black">
+          <!-- Male -->
+          <div class="flex items-center gap-2">
+            <img src="/svg/male.svg" alt="Male" class="w-8 h-8" />
+            <span> {{ malePercent() | number : "1.0-0" }}% Male </span>
+          </div>
+
+          <!-- Female -->
+          <div class="flex items-center gap-2">
+            <img src="/svg/female.svg" alt="Female" class="w-8 h-8" />
+            <span> {{ femalePercent() | number : "1.0-0" }}% Female </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANALYSIS CARD -->
+      <div class="bg-white border rounded-xl p-6 min-w-0">
+        <div class="h-[327px]">
+          <app-base-chart
+            class="w-full h-full"
+            [options]="demographicsAnalysisOptions()"
+          ></app-base-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

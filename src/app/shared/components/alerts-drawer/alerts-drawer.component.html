@@ -1,0 +1,56 @@
+<div
+  *ngIf="open"
+  class="fixed right-0 top-0 h-full w-[360px] bg-white border-l shadow-xl z-50"
+>
+  <!-- Header -->
+  <div class="flex items-center justify-between px-4 py-3 border-b">
+    <h3 class="text-lg font-semibold">Alerts</h3>
+    <button (click)="close.emit()">✕</button>
+  </div>
+
+  <!-- Content -->
+  <div class="p-4 space-y-4 overflow-y-auto h-[calc(100%-56px)]">
+
+    <ng-container *ngIf="alerts?.length; else empty">
+      <div
+        *ngFor="let alert of alerts"
+        class="border rounded-lg p-4 space-y-2"
+      >
+        <!-- Date Time -->
+        <p class="text-xs text-gray-400">
+          {{ alert.dateTime }}
+        </p>
+
+        <!-- Title -->
+        <p class="font-medium text-sm text-textPrimary">
+          {{ alert.title }}
+        </p>
+
+        <!-- Description -->
+        <p class="text-xs text-gray-600">
+          {{ alert.description }}
+        </p>
+
+        <!-- Severity -->
+        <span
+          class="inline-block text-xs px-2 py-0.5 rounded"
+          [ngClass]="{
+            'bg-red-100 text-red-700': alert.severity === 'high',
+            'bg-yellow-100 text-yellow-700': alert.severity === 'medium',
+            'bg-green-100 text-green-700': alert.severity === 'low'
+          }"
+        >
+          {{ alert.severity }}
+        </span>
+      </div>
+    </ng-container>
+
+    <!-- Empty State -->
+    <ng-template #empty>
+      <div class="text-center text-sm text-gray-400 mt-24">
+        No alerts yet
+      </div>
+    </ng-template>
+
+  </div>
+</div>
