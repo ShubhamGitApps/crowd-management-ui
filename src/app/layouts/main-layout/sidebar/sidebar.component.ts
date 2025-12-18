@@ -8,20 +8,17 @@ import { AuthService } from '../../../core/auth/auth.service';
   selector: 'app-sidebar',
   imports: [RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css'
+  styleUrl: './sidebar.component.css',
 })
 export class SidebarComponent {
   collapsed = signal(false);
 
-   constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   toggle() {
-    this.collapsed.update(v => !v);
+    this.collapsed.update((v) => !v);
   }
-  
+
   get toggleLabel() {
     return this.collapsed() ? 'Expand' : 'Collapse';
   }
@@ -30,5 +27,4 @@ export class SidebarComponent {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
-
 }
