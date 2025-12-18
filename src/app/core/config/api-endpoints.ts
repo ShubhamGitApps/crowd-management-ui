@@ -7,8 +7,8 @@ export const API_ENDPOINTS = {
     login: `${baseUrl}${auth}/login`,
   },
 
-  sites:{
-    site: `${baseUrl}${sites}`
+  sites: {
+    site: `${baseUrl}${sites}`,
   },
 
   analytics: {

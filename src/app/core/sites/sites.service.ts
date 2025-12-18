@@ -17,7 +17,6 @@ export interface Site {
 
 @Injectable({ providedIn: 'root' })
 export class SitesService {
-  
   constructor(private http: HttpClient) {}
 
   getAllSites() {

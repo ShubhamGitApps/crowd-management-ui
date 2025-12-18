@@ -12,7 +12,6 @@ import { API_ENDPOINTS } from '../config/api-endpoints';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardService {
-  
   constructor(
     private http: HttpClient,
     private siteContext: SiteContextService

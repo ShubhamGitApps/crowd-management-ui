@@ -141,7 +141,7 @@ export class OverviewComponent {
           type: 'group',
           right: 10,
           top: 30,
-          rotation: Math.PI / 2, 
+          rotation: Math.PI / 2,
           origin: [0, 0],
           children: [
             {

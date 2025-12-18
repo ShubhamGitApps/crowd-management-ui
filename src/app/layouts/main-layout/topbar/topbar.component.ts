@@ -37,11 +37,11 @@ export class TopbarComponent implements OnInit {
   }
 
   toggleAlerts() {
-    this.alertsOpen.update(v => !v);
+    this.alertsOpen.update((v) => !v);
   }
 
   toggleDropdown() {
-    this.dropdownOpen.update(v => !v);
+    this.dropdownOpen.update((v) => !v);
   }
 
   selectSite(site: Site) {

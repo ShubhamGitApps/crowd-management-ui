@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   providers: [EntryExitFacade],
   templateUrl: './entry-exit.component.html',
-  styleUrl: './entry-exit.component.css'
+  styleUrl: './entry-exit.component.css',
 })
 export class EntryExitComponent {
   constructor(public facade: EntryExitFacade) {}

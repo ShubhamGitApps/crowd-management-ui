@@ -41,5 +41,3 @@ export interface DemographicsResponse {
   timezone: string;
   buckets: DemographicsBucket[];
 }
-
-

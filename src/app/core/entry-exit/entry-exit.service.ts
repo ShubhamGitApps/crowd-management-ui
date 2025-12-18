@@ -7,18 +7,20 @@ import { API_ENDPOINTS } from '../config/api-endpoints';
 
 @Injectable({ providedIn: 'root' })
 export class EntryExitService {
-
   constructor(
     private http: HttpClient,
     private siteContext: SiteContextService
   ) {}
 
   getEntryExit(pageNumber = 1, pageSize = 50) {
-    return this.http.post<EntryExitResponse>(API_ENDPOINTS.analytics.entryExit, {
-      siteId: this.siteContext.siteId,
-      ...getUtcRangeMillis(),
-      pageNumber,
-      pageSize,
-    });
+    return this.http.post<EntryExitResponse>(
+      API_ENDPOINTS.analytics.entryExit,
+      {
+        siteId: this.siteContext.siteId,
+        ...getUtcRangeMillis(),
+        pageNumber,
+        pageSize,
+      }
+    );
   }
 }
